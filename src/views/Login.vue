@@ -1,4 +1,5 @@
 <template>
+  <h2>Login</h2>
   <form
     class="flex flex-col"
     @submit.prevent="login"
@@ -22,6 +23,9 @@
       Login
     </button>
   </form>
+  <router-link :to="{ name: RouteName.REGISTER }">
+    or register
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -29,6 +33,7 @@ import { ref, defineComponent } from 'vue';
 
 import { firebaseAuth } from '@/firebase';
 import router from '@/router';
+import { RouteName } from '@/router/route-name.enum';
 
 export default defineComponent({
   name: 'Login',
@@ -45,6 +50,7 @@ export default defineComponent({
       email,
       login,
       password,
+      RouteName,
     };
   },
 

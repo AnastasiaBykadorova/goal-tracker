@@ -1,11 +1,13 @@
 import { NavigationGuard } from 'vue-router';
 
-import { firebaseAuth } from '@/firebase';
+import { getCurrentUser } from '@/firebase';
 
 import { RouteName } from '../route-name.enum';
 
-export const authorizedGuard: NavigationGuard = (to, from, next) => {
-  if (firebaseAuth.currentUser) {
+export const authorizedGuard: NavigationGuard = async (to, from, next) => {
+  const user = await getCurrentUser();
+
+  if (user) {
     next({ name: RouteName.HOME });
 
     return;
