@@ -1,7 +1,11 @@
-import { ApolloServer, gql } from 'apollo-server-express';
+// eslint-disable-next-line import/no-unassigned-import
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { buildSchema } from 'type-graphql';
+import { GoalsResolver } from './resolvers/goals.resolver';
 
 console.log('Starting functions...');
 
@@ -9,27 +13,23 @@ admin.initializeApp({
   credential: admin.credential.applicationDefault(),
 });
 
-const typeDefs = gql`
-  type Goal {
-    title: String,
-    countPerWeek: Int,
-  }
+const app = express();
 
-  type Query {
-    goals: [Goal]
-  }
-`;
+const initializeGraphqlServer = async (expressApp: express.Express): Promise<void> => {
+  console.log('Initializing GQL server...');
 
-const resolvers = {
-  Query: {
-    goals: () => 'Success!',
-  },
+  const schema = await buildSchema({ resolvers: [GoalsResolver] });
+  const server = new ApolloServer({ schema });
+
+  server.applyMiddleware({
+    app: expressApp,
+    path: '/',
+    cors: true,
+  });
 };
 
-const app = express();
-const server = new ApolloServer({ typeDefs, resolvers });
-
-server.applyMiddleware({ app, path: '/', cors: true });
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+initializeGraphqlServer(app);
 
 console.log('Initializing functions...');
 
