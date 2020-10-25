@@ -1,18 +1,18 @@
 <template>
   <form
     class="flex flex-col"
-    @submit.prevent="logInputData"
+    @submit.prevent="login"
   >
     <input
-      v-model="login"
+      v-model="email"
       class="border rounded"
-      type="text"
+      type="email"
       placeholder="e-mail"
     >
     <input
       v-model="password"
       class="border rounded"
-      type="text"
+      type="password"
       placeholder="password"
     >
     <button
@@ -27,17 +27,22 @@
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 
+import { firebaseAuth } from '@/firebase';
+import router from '@/router';
+
 export default defineComponent({
   name: 'Login',
   setup() {
-    const login = ref('');
+    const email = ref('');
     const password = ref('');
-    const logInputData = () => {
-      console.log(login.value, password.value);
+    const login = async () => {
+      await firebaseAuth.signInWithEmailAndPassword(email.value, password.value);
+
+      router.push('/');
     };
 
     return {
-      logInputData,
+      email,
       login,
       password,
     };
