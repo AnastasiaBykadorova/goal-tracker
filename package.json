@@ -2,21 +2,32 @@
   "name": "goal-tracker",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:watch": "vue-cli-service build -- watch",
     "lint": "vue-cli-service lint",
     "serve:functions": "cd functions && yarn build:watch",
-    "start": "firebase emulators:start"
+    "start": "firebase emulators:start",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.2.5",
+    "@vue/apollo-composable": "^4.0.0-alpha.12",
     "core-js": "^3.6.5",
     "firebase": "^7.24.0",
+    "graphql": "^15.3.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "2.6.11"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.19.0",
+    "@graphql-codegen/typescript": "^1.17.11",
+    "@graphql-codegen/typescript-document-nodes": "1.17.8",
+    "@graphql-codegen/typescript-operations": "1.17.8",
+    "@graphql-codegen/typescript-vue-apollo": "^2.1.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -33,6 +44,7 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
+    "vue-cli-plugin-apollo": "~0.22.2",
     "vue-cli-plugin-tailwind": "~1.5.0",
     "vue-svg-loader": "^0.17.0-beta.2"
   }
