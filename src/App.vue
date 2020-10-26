@@ -8,6 +8,9 @@ import { defineComponent, provide } from 'vue';
 import { apolloClient } from './graphql/client';
 
 export default defineComponent({
+  setup() {
+    provide(DefaultApolloClient, apolloClient);
+  },
 });
 </script>
 
