@@ -1,0 +1,20 @@
+name: Deploy to Firebase Functions on merge
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd functions && yarn install && yarn build
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BULKA_GOAL_TRACKER }}
+          PROJECT_ID: bulka-goal-tracker
