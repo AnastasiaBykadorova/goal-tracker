@@ -1,6 +1,6 @@
 <template>
   <AppBar>New Goal</AppBar>
-  <form @submit.prevent="logTitleAndCount">
+  <form @submit.prevent="addGoal">
     <label for="title">Title</label>
     <input
       v-model="title"
@@ -25,23 +25,28 @@
 import { defineComponent, ref } from 'vue';
 
 import { AppBar } from '@/components';
+import { useAddGoalMutation } from '@/graphql/gql.generated';
 
 export default defineComponent({
   components: {
     AppBar,
   },
   setup() {
+    const addGoalMutation = useAddGoalMutation();
+
     const title = ref('');
     const countPerWeek = ref<number | null>(null);
 
-    const logTitleAndCount = () => {
-      console.log(title.value, countPerWeek.value);
+    const addGoal = async () => {
+      const { data } = await addGoalMutation.mutate();
+
+      console.log(data);
     };
 
     return {
       title,
       countPerWeek,
-      logTitleAndCount,
+      addGoal,
     };
   },
 

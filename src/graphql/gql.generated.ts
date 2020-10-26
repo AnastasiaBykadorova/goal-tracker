@@ -20,9 +20,26 @@ export type Query = {
 
 export type Goal = {
   __typename?: 'Goal';
+  id: Scalars['ID'];
   title: Scalars['String'];
   countPerWeek: Scalars['Int'];
 };
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addGoal: Goal;
+};
+
+export type AddGoalMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AddGoalMutation = (
+  { __typename?: 'Mutation' }
+  & { addGoal: (
+    { __typename?: 'Goal' }
+    & Pick<Goal, 'id' | 'title' | 'countPerWeek'>
+  ) }
+);
 
 export type TestQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -36,6 +53,15 @@ export type TestQuery = (
 );
 
 
+export const AddGoal = gql`
+    mutation addGoal {
+  addGoal {
+    id
+    title
+    countPerWeek
+  }
+}
+    `;
 export const Test = gql`
     query test {
   goals {
@@ -44,6 +70,36 @@ export const Test = gql`
 }
     `;
 
+export const AddGoalDocument = gql`
+    mutation addGoal {
+  addGoal {
+    id
+    title
+    countPerWeek
+  }
+}
+    `;
+
+/**
+ * __useAddGoalMutation__
+ *
+ * To run a mutation, you first call `useAddGoalMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useAddGoalMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useAddGoalMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAddGoalMutation(options: VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables>> = {}) {
+            return VueApolloComposable.useMutation<AddGoalMutation, AddGoalMutationVariables>(AddGoalDocument, options);
+          }
+export type AddGoalMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<AddGoalMutation, AddGoalMutationVariables>;
 export const TestDocument = gql`
     query test {
   goals {

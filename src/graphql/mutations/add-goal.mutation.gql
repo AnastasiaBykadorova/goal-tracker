@@ -1,0 +1,7 @@
+mutation addGoal {
+  addGoal {
+    id
+    title
+    countPerWeek
+  }
+}
