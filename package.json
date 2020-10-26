@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:watch": "vue-cli-service build -- watch",
+    "build:watch": "vue-cli-service build --watch",
     "lint": "vue-cli-service lint",
     "serve:functions": "cd functions && yarn build:watch",
     "start": "firebase emulators:start",
@@ -44,6 +44,9 @@
     "eslint-plugin-vue": "^7.0.0-0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
     "typescript": "~3.9.3",
     "vue-cli-plugin-tailwind": "~1.5.0",
     "vue-svg-loader": "^0.17.0-beta.2"

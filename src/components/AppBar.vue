@@ -1,9 +1,15 @@
 <template>
-  <div class="h-12 bg-blue-500 text-white flex justify-end">
-    <LogoutSvg
-      class="h-full p-2"
-      @click="logout"
-    />
+  <div class="h-12 bg-blue-500 text-white flex">
+    <div class="p-2 w-12" />
+    <h3 class="font-bold m-auto">
+      <slot />
+    </h3>
+    <div class="p-2 w-12">
+      <LogoutSvg
+        class="h-full"
+        @click="logout"
+      />
+    </div>
   </div>
 </template>
 

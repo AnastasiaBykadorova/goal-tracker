@@ -26,6 +26,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
     beforeEnter: authorizedGuard,
   },
+  {
+    path: '/goal-edit',
+    name: RouteName.GOAL_EDIT,
+    component: () => import(/* webpackChunkName: "goal-edit" */ '../views/GoalEdit.vue'),
+    beforeEnter: unauthorizedGuard,
+  },
 ];
 
 const router = createRouter({

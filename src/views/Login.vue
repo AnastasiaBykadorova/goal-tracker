@@ -16,10 +16,7 @@
       type="password"
       placeholder="password"
     >
-    <button
-      class="block font-bold py-2 px-4 bg-blue-500 text-white rounded"
-      type="submit"
-    >
+    <button type="submit">
       Login
     </button>
   </form>
@@ -43,7 +40,7 @@ export default defineComponent({
     const login = async () => {
       await firebaseAuth.signInWithEmailAndPassword(email.value, password.value);
 
-      router.push('/');
+      router.push({ name: RouteName.HOME });
     };
 
     return {
