@@ -10,8 +10,18 @@ export class GoalsResolver {
   goalsCollection = admin.firestore().collection(CollectionName.GOALS) as GoalsCollection;
 
   @Query(() => [Goal], { name: 'goals' })
-  getGoals(): Goal[] {
-    return [{ id: 'somegoal', title: 'Success!', countPerWeek: 7 }];
+  async getGoals(): Promise<Goal[]> {
+    const goalsSnapshot = await this.goalsCollection.get();
+    const goalsData = goalsSnapshot.docs.map((goalDocument) => {
+      const goal: Goal = {
+        ...goalDocument.data(),
+        id: goalDocument.id,
+      };
+
+      return goal;
+    });
+
+    return goalsData;
   }
 
   @Mutation(() => Goal)
