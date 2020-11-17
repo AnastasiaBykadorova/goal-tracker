@@ -1,7 +1,15 @@
 <template>
   <AppBar>Home</AppBar>
   <div>
-    <h1>This is home page</h1>
+    <h1
+      v-for="goal in goals"
+      :key="goal.id"
+    >
+      Goal ID: {{ goal.id }}
+      Goal Title: {{ goal.title }}
+      Goal Count Per Week: {{ goal.countPerWeek }}
+      ______________________________________________
+    </h1>
   </div>
   <Fab
     class="bg-blue-500 hover:bg-blue-600"
@@ -10,10 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 import { AppBar, Fab } from '@/components';
-import { useTestQuery } from '@/graphql/gql.generated';
+import { useGetGoalsQuery } from '@/graphql/gql.generated';
 import router from '@/router';
 import { RouteName } from '@/router/route-name.enum';
 
@@ -23,15 +31,16 @@ export default defineComponent({
     Fab,
   },
   setup() {
-    const some = useTestQuery();
+    const { result } = useGetGoalsQuery();
     const addGoal = () => {
-      router.push({ name: RouteName.GOAL_EDIT });
+      // router.push({ name: RouteName.GOAL_EDIT });
     };
 
-    console.log(some);
+    const goals = computed(() => result.value?.goals);
 
     return {
       addGoal,
+      goals,
     };
   },
 });

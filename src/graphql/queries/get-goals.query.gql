@@ -1,0 +1,7 @@
+query getGoals {
+  goals {
+    id
+    title
+    countPerWeek
+  }
+}

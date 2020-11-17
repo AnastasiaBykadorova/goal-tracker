@@ -41,14 +41,14 @@ export type AddGoalMutation = (
   ) }
 );
 
-export type TestQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetGoalsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TestQuery = (
+export type GetGoalsQuery = (
   { __typename?: 'Query' }
   & { goals: Array<(
     { __typename?: 'Goal' }
-    & Pick<Goal, 'title'>
+    & Pick<Goal, 'id' | 'title' | 'countPerWeek'>
   )> }
 );
 
@@ -62,10 +62,12 @@ export const AddGoal = gql`
   }
 }
     `;
-export const Test = gql`
-    query test {
+export const GetGoals = gql`
+    query getGoals {
   goals {
+    id
     title
+    countPerWeek
   }
 }
     `;
@@ -100,30 +102,32 @@ export function useAddGoalMutation(options: VueApolloComposable.UseMutationOptio
             return VueApolloComposable.useMutation<AddGoalMutation, AddGoalMutationVariables>(AddGoalDocument, options);
           }
 export type AddGoalMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<AddGoalMutation, AddGoalMutationVariables>;
-export const TestDocument = gql`
-    query test {
+export const GetGoalsDocument = gql`
+    query getGoals {
   goals {
+    id
     title
+    countPerWeek
   }
 }
     `;
 
 /**
- * __useTestQuery__
+ * __useGetGoalsQuery__
  *
- * To run a query within a Vue component, call `useTestQuery` and pass it any options that fit your needs.
- * When your component renders, `useTestQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * To run a query within a Vue component, call `useGetGoalsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGoalsQuery` returns an object from Apollo Client that contains result, loading and error properties
  * you can use to render your UI.
  *
  * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
  *
  * @example
- * const { result, loading, error } = useTestQuery(
+ * const { result, loading, error } = useGetGoalsQuery(
  *   {
  *   }
  * );
  */
-export function useTestQuery(options: VueApolloComposable.UseQueryOptions<TestQuery, TestQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<TestQuery, TestQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<TestQuery, TestQueryVariables>> = {}) {
-            return VueApolloComposable.useQuery<TestQuery, undefined>(TestDocument, undefined, options);
+export function useGetGoalsQuery(options: VueApolloComposable.UseQueryOptions<GetGoalsQuery, GetGoalsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetGoalsQuery, GetGoalsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetGoalsQuery, GetGoalsQueryVariables>> = {}) {
+            return VueApolloComposable.useQuery<GetGoalsQuery, undefined>(GetGoalsDocument, undefined, options);
           }
-export type TestQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<TestQuery, TestQueryVariables>;
+export type GetGoalsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetGoalsQuery, GetGoalsQueryVariables>;
