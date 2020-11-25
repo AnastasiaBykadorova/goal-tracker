@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-null */
 module.exports = {
   extends: ['stylelint-config-standard'],
   plugins: [

@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { AppBar, Fab } from '@/components';
 import { useGetGoalsQuery } from '@/graphql/gql.generated';
-import router from '@/router';
 import { RouteName } from '@/router/route-name.enum';
 
 export default defineComponent({
@@ -31,9 +31,11 @@ export default defineComponent({
     Fab,
   },
   setup() {
+    const router = useRouter();
     const { result } = useGetGoalsQuery();
-    const addGoal = () => {
-      // router.push({ name: RouteName.GOAL_EDIT });
+
+    const addGoal = (): void => {
+      router.push({ name: RouteName.GOAL_EDIT });
     };
 
     const goals = computed(() => result.value?.goals);

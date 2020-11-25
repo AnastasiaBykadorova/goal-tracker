@@ -35,7 +35,7 @@ export default defineComponent({
     const addGoalMutation = useAddGoalMutation();
 
     const title = ref('');
-    const countPerWeek = ref<number | null>(null);
+    const countPerWeek = ref<number | undefined>();
 
     const addGoal = async () => {
       const { data } = await addGoalMutation.mutate();
@@ -52,7 +52,3 @@ export default defineComponent({
 
 });
 </script>
-
-<style>
-
-</style>
