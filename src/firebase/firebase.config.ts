@@ -1,4 +1,4 @@
-export interface FirebaseConfig {
+export interface IFirebaseConfig {
   apiKey: string;
   authDomain: string;
   databaseURL: string;
@@ -8,7 +8,7 @@ export interface FirebaseConfig {
   appId: string;
 }
 
-export const firebaseConfig: FirebaseConfig = {
+export const firebaseConfig: IFirebaseConfig = {
   apiKey: 'AIzaSyD8LnswQCyKpTfm3HE0_ocThEdBkOxBHx0',
   authDomain: 'bulka-goal-tracker.firebaseapp.com',
   databaseURL: 'https://bulka-goal-tracker.firebaseio.com',

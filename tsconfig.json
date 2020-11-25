@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -11,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "outDir": "tsc",
     "types": [
       "webpack-env"
     ],
@@ -30,10 +32,16 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/**/*.svg",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "*.js"
   ],
   "exclude": [
     "node_modules"
+  ], 
+  "files": [
+    ".eslintrc.js",
+    ".eslintrc.common.js"
   ]
 }

@@ -1,3 +1,21 @@
+body {
+  @apply text-gray-800;
+
+  font-family: "Montserrat", sans-serif;
+}
+
+button {
+  @apply block font-bold py-2 px-4 bg-blue-500 text-white rounded;
+}
+
 button:focus {
   outline: 0;
+}
+
+label {
+  @apply block text-gray-600 text-sm;
+}
+
+input {
+  @apply border rounded bg-gray-200;
 }

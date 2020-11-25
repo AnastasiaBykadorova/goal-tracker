@@ -1,0 +1,13 @@
+overwrite: true
+schema: "http://localhost:5001/bulka-goal-tracker/us-central1/api"
+documents: "src/graphql/**/*.gql"
+generates:
+  src/graphql/gql.generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-document-nodes"
+      - "typescript-vue-apollo"
+    config:
+      withCompositionFunctions: true
+      vueCompositionApiImportFrom: vue

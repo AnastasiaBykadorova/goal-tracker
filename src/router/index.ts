@@ -6,7 +6,7 @@ import { authorizedGuard } from './guards/authorized.guard';
 import { unauthorizedGuard } from './guards/unauthorized.guard';
 import { RouteName } from './route-name.enum';
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: RouteName.HOME,
@@ -16,15 +16,21 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: RouteName.LOGIN,
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+    component: async (): Promise<typeof import('*.vue')> => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
     beforeEnter: authorizedGuard,
 
   },
   {
     path: '/register',
     name: RouteName.REGISTER,
-    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
+    component: async (): Promise<typeof import('*.vue')> => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
     beforeEnter: authorizedGuard,
+  },
+  {
+    path: '/goal-edit',
+    name: RouteName.GOAL_EDIT,
+    component: async (): Promise<typeof import('*.vue')> => import(/* webpackChunkName: "goal-edit" */ '../views/GoalEdit.vue'),
+    beforeEnter: unauthorizedGuard,
   },
 ];
 
