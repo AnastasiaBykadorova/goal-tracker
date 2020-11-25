@@ -38,7 +38,7 @@ export default defineComponent({
       router.push({ name: RouteName.GOAL_EDIT });
     };
 
-    const goals = computed(() => result.value?.goals);
+    const goals = computed(() => result.value.goals);
 
     return {
       addGoal,

@@ -27,17 +27,19 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { firebaseAuth } from '@/firebase';
-import router from '@/router';
 import { RouteName } from '@/router/route-name.enum';
 
 export default defineComponent({
   name: 'Login',
   setup() {
+    const router = useRouter();
+
     const email = ref('');
     const password = ref('');
-    const login = async () => {
+    const login = async (): Promise<void> => {
       await firebaseAuth.signInWithEmailAndPassword(email.value, password.value);
 
       router.push({ name: RouteName.HOME });
