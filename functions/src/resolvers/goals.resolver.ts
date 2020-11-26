@@ -1,4 +1,6 @@
-import { Resolver, Query, Mutation } from 'type-graphql';
+import {
+  Resolver, Query, Mutation, Arg,
+} from 'type-graphql';
 import { Goal } from '@/models/goal.model';
 import * as admin from 'firebase-admin';
 import { CollectionName } from '@/enums/collection-name.enum';
@@ -25,10 +27,13 @@ export class GoalsResolver {
   }
 
   @Mutation(() => Goal)
-  async addGoal(): Promise<Goal> {
+  async addGoal(
+    @Arg('title') title: string,
+      @Arg('countPerWeek') countPerWeek: number,
+  ): Promise<Goal> {
     const goalInput = {
-      title: 'Test Title!',
-      countPerWeek: 6,
+      title,
+      countPerWeek,
     };
     const newGoalDocumentReference = await this.goalsCollection.add(goalInput);
     const newGoalDocument = await newGoalDocumentReference.get();
