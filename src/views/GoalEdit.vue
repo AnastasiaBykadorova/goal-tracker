@@ -23,24 +23,35 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { AppBar } from '@/components';
-import { useAddGoalMutation } from '@/graphql/gql.generated';
+import { GetGoalsDocument, useAddGoalMutation } from '@/graphql/gql.generated';
+import { RouteName } from '@/router/route-name.enum';
 
 export default defineComponent({
   components: {
     AppBar,
   },
   setup() {
-    const addGoalMutation = useAddGoalMutation();
+    const router = useRouter();
 
     const title = ref('');
-    const countPerWeek = ref<number | undefined>();
+    const countPerWeek = ref(1);
 
-    const addGoal = async () => {
-      const { data } = await addGoalMutation.mutate();
+    const addGoalMutation = useAddGoalMutation({
+      refetchQueries: [{
+        query: GetGoalsDocument,
+      }],
+    });
 
-      console.log(data);
+    const addGoal = async (): Promise<void> => {
+      await addGoalMutation.mutate({
+        title: title.value,
+        countPerWeek: countPerWeek.value,
+      });
+
+      router.push({ name: RouteName.HOME });
     };
 
     return {

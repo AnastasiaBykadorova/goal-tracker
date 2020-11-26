@@ -1,5 +1,5 @@
-mutation addGoal {
-  addGoal {
+mutation addGoal($title: String!, $countPerWeek: Float!) {
+  addGoal(title: $title, countPerWeek: $countPerWeek) {
     id
     title
     countPerWeek

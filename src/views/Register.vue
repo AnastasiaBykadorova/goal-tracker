@@ -40,7 +40,7 @@ export default defineComponent({
   setup() {
     const email = ref('');
     const password = ref('');
-    const register = async () => {
+    const register = async (): Promise<void> => {
       await firebaseAuth.createUserWithEmailAndPassword(email.value, password.value);
 
       router.push({ name: RouteName.HOME });

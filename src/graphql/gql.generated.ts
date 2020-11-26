@@ -30,7 +30,16 @@ export type Mutation = {
   addGoal: Goal;
 };
 
-export type AddGoalMutationVariables = Exact<{ [key: string]: never; }>;
+
+export type MutationAddGoalArgs = {
+  countPerWeek: Scalars['Float'];
+  title: Scalars['String'];
+};
+
+export type AddGoalMutationVariables = Exact<{
+  title: Scalars['String'];
+  countPerWeek: Scalars['Float'];
+}>;
 
 
 export type AddGoalMutation = (
@@ -54,8 +63,8 @@ export type GetGoalsQuery = (
 
 
 export const AddGoal = gql`
-    mutation addGoal {
-  addGoal {
+    mutation addGoal($title: String!, $countPerWeek: Float!) {
+  addGoal(title: $title, countPerWeek: $countPerWeek) {
     id
     title
     countPerWeek
@@ -73,8 +82,8 @@ export const GetGoals = gql`
     `;
 
 export const AddGoalDocument = gql`
-    mutation addGoal {
-  addGoal {
+    mutation addGoal($title: String!, $countPerWeek: Float!) {
+  addGoal(title: $title, countPerWeek: $countPerWeek) {
     id
     title
     countPerWeek
@@ -95,10 +104,12 @@ export const AddGoalDocument = gql`
  * @example
  * const { mutate, loading, error, onDone } = useAddGoalMutation({
  *   variables: {
+ *      title: // value for 'title'
+ *      countPerWeek: // value for 'countPerWeek'
  *   },
  * });
  */
-export function useAddGoalMutation(options: VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables>> = {}) {
+export function useAddGoalMutation(options: VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<AddGoalMutation, AddGoalMutationVariables>>) {
             return VueApolloComposable.useMutation<AddGoalMutation, AddGoalMutationVariables>(AddGoalDocument, options);
           }
 export type AddGoalMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<AddGoalMutation, AddGoalMutationVariables>;

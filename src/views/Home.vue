@@ -18,7 +18,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { useResult } from '@vue/apollo-composable';
+import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { AppBar, Fab } from '@/components';
@@ -37,8 +38,7 @@ export default defineComponent({
     const addGoal = (): void => {
       router.push({ name: RouteName.GOAL_EDIT });
     };
-
-    const goals = computed(() => result.value.goals);
+    const goals = useResult(result, [], (data) => data.goals);
 
     return {
       addGoal,

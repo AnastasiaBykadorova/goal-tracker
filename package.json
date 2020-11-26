@@ -39,6 +39,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "apollo-client": "^2.6.10",
     "eslint": "^7.14.0",
     "eslint-config-temoncher": "^1.1.5",
     "eslint-plugin-import": "^2.22.1",
