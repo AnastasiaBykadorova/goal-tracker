@@ -15,3 +15,5 @@ export const apolloClient = new ApolloClient({
   link: httpLink,
   cache,
 });
+
+// TODO: Add authorization header
