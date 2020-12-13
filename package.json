@@ -9,7 +9,7 @@
     "watch:app": "vue-cli-service build --watch",
     "lint": "vue-cli-service lint",
     "watch:functions": "cd functions && yarn build:watch",
-    "start": "firebase emulators:start",
+    "start": "firebase emulators:start --import=.firebase --export-on-exit",
     "gen": "graphql-codegen --config codegen.yml",
     "postinstall": "node apollo-fix.js"
   },
