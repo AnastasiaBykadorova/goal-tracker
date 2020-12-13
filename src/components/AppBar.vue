@@ -29,7 +29,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const logout = async () => {
+    const logout = async (): Promise<void> => {
       await firebaseAuth.signOut();
 
       router.push({ name: RouteName.LOGIN });

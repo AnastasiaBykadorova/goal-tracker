@@ -11,10 +11,6 @@
       ______________________________________________
     </h1>
   </div>
-  <Fab
-    class="bg-blue-500 hover:bg-blue-600"
-    @click="addGoal"
-  />
 </template>
 
 <script lang="ts">
@@ -22,14 +18,13 @@ import { useResult } from '@vue/apollo-composable';
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { AppBar, Fab } from '@/components';
+import { AppBar } from '@/components';
 import { useGetGoalsQuery } from '@/graphql/gql.generated';
 import { RouteName } from '@/router/route-name.enum';
 
 export default defineComponent({
   components: {
     AppBar,
-    Fab,
   },
   setup() {
     const router = useRouter();
