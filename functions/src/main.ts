@@ -6,6 +6,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { buildSchema } from 'type-graphql';
 import { GoalsResolver } from './resolvers/goals.resolver';
+import { UserGoalsResolver } from './resolvers/user-goals.resolver';
 
 console.log('Starting functions...');
 
@@ -18,8 +19,11 @@ const app = express();
 const initializeGraphqlServer = async (expressApp: express.Express): Promise<void> => {
   console.log('Initializing GQL server...');
 
-  const schema = await buildSchema({ resolvers: [GoalsResolver] });
-  const server = new ApolloServer({ schema });
+  const schema = await buildSchema({ resolvers: [GoalsResolver, UserGoalsResolver] });
+  const server = new ApolloServer({
+    schema,
+    context: ({ req }) => ({ headers: req.headers }),
+  });
 
   server.applyMiddleware({
     app: expressApp,
