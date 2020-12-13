@@ -1,5 +1,5 @@
 import {
-  Field, Int, ObjectType, ID,
+  Field, ObjectType, ID,
 } from 'type-graphql';
 import { IGoal } from '@/interfaces/goal.interface';
 
@@ -10,7 +10,4 @@ export class Goal implements IGoal {
 
   @Field(() => String)
   title: string;
-
-  @Field(() => Int)
-  countPerWeek: number;
 }

@@ -22,7 +22,6 @@ export type Goal = {
   __typename?: 'Goal';
   id: Scalars['ID'];
   title: Scalars['String'];
-  countPerWeek: Scalars['Int'];
 };
 
 export type GetGoalsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -32,7 +31,7 @@ export type GetGoalsQuery = (
   { __typename?: 'Query' }
   & { goals: Array<(
     { __typename?: 'Goal' }
-    & Pick<Goal, 'id' | 'title' | 'countPerWeek'>
+    & Pick<Goal, 'id' | 'title'>
   )> }
 );
 
@@ -42,7 +41,6 @@ export const GetGoals = gql`
   goals {
     id
     title
-    countPerWeek
   }
 }
     `;
@@ -52,7 +50,6 @@ export const GetGoalsDocument = gql`
   goals {
     id
     title
-    countPerWeek
   }
 }
     `;
